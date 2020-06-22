@@ -4,12 +4,12 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
 
-    this->CreateDBConnection();
-    this->CreateCentralWidget();
+    CreateDBConnection();
+    CreateCentralWidget();
+    CreateMainMenu();
+    CreateForms();
 
-    this->setWindowTitle("Клиент PostgreSQL");
-    this->setMinimumWidth(500);
-    this->setMinimumHeight(480);
+    connect(newQuery, &QAction::triggered, this, &MainWindow::newQueryAction);
 }
 
 MainWindow::~MainWindow()
@@ -19,13 +19,18 @@ MainWindow::~MainWindow()
 void MainWindow::CreateCentralWidget()
 {
     model = new QSqlQueryModel;
-    model->setQuery("SELECT * FROM Nodes ORDER BY Id;");
+    model->setQuery("SELECT * FROM PQCA.Contragents ORDER BY Id;");
     model->setHeaderData(0, Qt::Horizontal, "ID");
-    model->setHeaderData(1, Qt::Horizontal, "Наименование");
-    model->setHeaderData(2, Qt::Horizontal, "Значение");
+    model->setHeaderData(1, Qt::Horizontal, "Имя");
+    model->setHeaderData(2, Qt::Horizontal, "Должность");
+    model->setHeaderData(3, Qt::Horizontal, "Инициалы");
+    model->setHeaderData(4, Qt::Horizontal, "Внешний");
     tw->setModel(model);
 
-    this->setCentralWidget(tw);
+    setCentralWidget(tw);
+    setWindowTitle("Клиент PostgreSQL");
+    setMinimumWidth(550);
+    setMinimumHeight(480);
 }
 
 void MainWindow::CreateDBConnection()
@@ -41,4 +46,25 @@ void MainWindow::CreateDBConnection()
     {
         QMessageBox::critical(this, "DB connection error", "Error connection to DB!");
     }
+}
+
+void MainWindow::CreateMainMenu()
+{
+//    menuBar = new QMenuBar;
+    menu = menuBar()->addMenu("Файл");
+    newQuery = new QAction("Новый элемент");
+    menu->addAction(newQuery);
+
+}
+
+void MainWindow::newQueryAction()
+{
+    lineParameters->exec();
+}
+
+void MainWindow::CreateForms()
+{
+    lineParameters = new addLineParameter(this);
+    lineParameters->setCaption("Добавить химический элемент");
+
 }
