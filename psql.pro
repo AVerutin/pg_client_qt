@@ -19,11 +19,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     addlineparameter.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    tableviews.cpp
 
 HEADERS += \
     addlineparameter.h \
-    mainwindow.h
+    mainwindow.h \
+    tableviews.h
 
 TRANSLATIONS += \
     psql_ru_RU.ts

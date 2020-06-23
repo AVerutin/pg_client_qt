@@ -50,21 +50,24 @@ void MainWindow::CreateDBConnection()
 
 void MainWindow::CreateMainMenu()
 {
-//    menuBar = new QMenuBar;
-    menu = menuBar()->addMenu("Файл");
-    newQuery = new QAction("Новый элемент");
-    menu->addAction(newQuery);
+    menu = menuBar()->addMenu("&Справочники");
+    mnuGroups = new QAction("Группы элементов");
+    menu->addAction(mnuGroups);
 
 }
 
 void MainWindow::newQueryAction()
 {
-    lineParameters->exec();
+//    lineParameters->exec();
+    tViews->exec();
 }
 
 void MainWindow::CreateForms()
 {
-    lineParameters = new addLineParameter(this);
-    lineParameters->setCaption("Добавить химический элемент");
+//    lineParameters = new addLineParameter(this);
+//    lineParameters->setCaption("Добавить химический элемент");
 
+    tViews = new TableViews();
+    tViews->setCaption("Справочник групп");
+    tViews->setQuery("SELECT * FROM pqca.Groups ORDER BY Id");
 }

@@ -6,6 +6,7 @@
 #include <QtSql>
 
 #include "addlineparameter.h"
+#include "tableviews.h"
 
 class MainWindow : public QMainWindow
 {
@@ -25,9 +26,8 @@ public:
     QSqlQuery *query;
     QSqlQueryModel *model;
 
-//    QMenuBar *menuBar;
     QMenu *menu;
-    QAction *newQuery;
+    QAction *mnuGroups;
     QPushButton *runQuery;
     QLineEdit *leQuery;
 
@@ -37,6 +37,7 @@ public:
 
     // Вспомогательные формы
     addLineParameter *lineParameters;
+    TableViews *tViews;
 
 private slots:
     void newQueryAction();
